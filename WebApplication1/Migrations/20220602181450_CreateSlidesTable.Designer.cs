@@ -9,8 +9,8 @@ using WebApplication1.DAL;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220601215323_CreateSlideTable")]
-    partial class CreateSlideTable
+    [Migration("20220602181450_CreateSlidesTable")]
+    partial class CreateSlidesTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,7 +32,7 @@ namespace WebApplication1.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Slide");
+                    b.ToTable("Slides");
                 });
 #pragma warning restore 612, 618
         }

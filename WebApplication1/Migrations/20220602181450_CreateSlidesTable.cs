@@ -2,12 +2,12 @@
 
 namespace WebApplication1.Migrations
 {
-    public partial class CreateSlideTable : Migration
+    public partial class CreateSlidesTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Slide",
+                name: "Slides",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -16,14 +16,14 @@ namespace WebApplication1.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Slide", x => x.Id);
+                    table.PrimaryKey("PK_Slides", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Slide");
+                name: "Slides");
         }
     }
 }

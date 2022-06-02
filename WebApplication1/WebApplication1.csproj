@@ -5,6 +5,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20220601215323_CreateSlideTable.cs" />
+    <Compile Remove="Migrations\20220601215323_CreateSlideTable.Designer.cs" />
+    <Compile Remove="Migrations\20220602191700_CreateProductCategoryTables.cs" />
+    <Compile Remove="Migrations\20220602191700_CreateProductCategoryTables.Designer.cs" />
+    <Compile Remove="Migrations\20220602202826_CreateValentineSummaryTable.cs" />
+    <Compile Remove="Migrations\20220602202826_CreateValentineSummaryTable.Designer.cs" />
+    <Compile Remove="Migrations\20220602203423_CreateValentineSummaryTables.cs" />
+    <Compile Remove="Migrations\20220602203423_CreateValentineSummaryTables.Designer.cs" />
+    <Compile Remove="Migrations\20220602204438_CreateValentineSummaryTables.cs" />
+    <Compile Remove="Migrations\20220602204438_CreateValentineSummaryTables.Designer.cs" />
+    <Compile Remove="Migrations\20220602210307_CreateValentineSummaryTables.cs" />
+    <Compile Remove="Migrations\20220602210307_CreateValentineSummaryTables.Designer.cs" />
+    <Compile Remove="Migrations\20220602213854_CreateFlowerExpertsTables.cs" />
+    <Compile Remove="Migrations\20220602213854_CreateFlowerExpertsTables.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.25" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.25" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.25">

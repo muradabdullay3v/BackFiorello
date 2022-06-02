@@ -1,5 +1,6 @@
 ﻿@using WebApplication1.Models
-@model List<Slide>
+@using WebApplication1.ViewModels
+@model HomeViewModel
 
 <!DOCTYPE html>
 <html lang="en">
@@ -439,7 +440,7 @@
         </nav>
         <div class="slider">
             <div class="slide">
-                @foreach (var slide in Model)
+                @foreach (var slide in Model.Slides)
                {
                    <div
                     style="background-image:url(@slide.Url)">
@@ -458,10 +459,9 @@
                 <i class="fa-solid fa-circle"></i>
             </div>
             <div class="slider_text">
-                <h2>Send <span>flowers</span> like you mean it.</h2>
-                <p>Where flowers are our inspiration to create lasting memories.Whatever the occasion,our flowers will
-                    make it special cursus a sit amet mauris.</p>
-                <img src="https://fiorello.qodeinteractive.com/wp-content/uploads/2018/04/h2-sign-img.png" alt="image"
+                @Html.Raw(Model.Summary.Title)
+                <p>@Model.Summary.Description</p>
+                <img src="@Model.Summary.Image" alt="image"
                     class="slider_sara_text">
             </div>
         </div>
