@@ -142,3 +142,12 @@ F:\VS pr\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\runtimes\win-x8
 F:\VS pr\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 F:\VS pr\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 F:\VS pr\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+F:\VS pr\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
+F:\VS pr\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Areas\FiorelloAdmin\Views\Shared\_AdminLayout.cshtml.g.cs
+F:\VS pr\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Areas\FiorelloAdmin\Views\_ViewStart.cshtml.g.cs
+F:\VS pr\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Areas\FiorelloAdmin\Views\_ViewImports.cshtml.g.cs
+F:\VS pr\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Areas\FiorelloAdmin\Views\Dashboard\Index.cshtml.g.cs
+F:\VS pr\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Areas\FiorelloAdmin\Views\Category\Index.cshtml.g.cs
+F:\VS pr\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Areas\FiorelloAdmin\Views\Category\Create.cshtml.g.cs
+F:\VS pr\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Areas\FiorelloAdmin\Views\Category\Update.cshtml.g.cs
+F:\VS pr\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Areas\FiorelloAdmin\Views\Slider\Index.cshtml.g.cs
