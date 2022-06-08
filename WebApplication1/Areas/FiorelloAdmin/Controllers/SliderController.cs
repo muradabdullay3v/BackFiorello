@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.IO;
+using System.Threading.Tasks;
 using WebApplication1.DAL;
 using WebApplication1.Models;
 
@@ -9,10 +12,12 @@ namespace WebApplication1.Areas.FiorelloAdmin.Controllers
     public class SliderController : Controller
     {
         private AppDbContext _context { get;}
+        private IWebHostEnvironment _env { get; }
 
-        public SliderController(AppDbContext context)
+        public SliderController(AppDbContext context , IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
         public IActionResult Index()
         {
@@ -25,7 +30,7 @@ namespace WebApplication1.Areas.FiorelloAdmin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Slide slide)
+        public async Task<IActionResult> Create(Slide slide)
         {
             if (!ModelState.IsValid)
             {
@@ -41,12 +46,17 @@ namespace WebApplication1.Areas.FiorelloAdmin.Controllers
                 ModelState.AddModelError("Photo", "Type of File must be image");
                 return View();
             }
-            using (FileStream fileStream = new FileStream(@"F:\VS pr\WebApplication1\WebApplication1\wwwroot\images\" + slide.Photo.FileName, FileMode.Create))
+            var fileName=Guid.NewGuid().ToString() + slide.Photo.FileName;
+            var resultPath = Path.Combine(_env.WebRootPath,"img",fileName);
+            using (FileStream fileStream = new FileStream(resultPath, FileMode.Create))
             {
-                slide.Photo.CopyTo(fileStream);
+                await slide.Photo.CopyToAsync(fileStream);
 
             }
-            return Json(slide.Photo.FileName);
+            slide.Url = fileName;
+            await _context.Slides.AddAsync(slide);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
