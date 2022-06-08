@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.IO;
 using WebApplication1.DAL;
 using WebApplication1.Models;
 
@@ -33,8 +34,19 @@ namespace WebApplication1.Areas.FiorelloAdmin.Controllers
             if (slide.Photo.Length/1024 > 200)
             {
                 ModelState.AddModelError("Photo" , "Image's max size must be less than 200kb");
+                return View();
             }
-            return Content("Ok");
+            if (!slide.Photo.ContentType.Contains("image/"))
+            {
+                ModelState.AddModelError("Photo", "Type of File must be image");
+                return View();
+            }
+            using (FileStream fileStream = new FileStream(@"F:\VS pr\WebApplication1\WebApplication1\wwwroot\images\" + slide.Photo.FileName, FileMode.Create))
+            {
+                slide.Photo.CopyTo(fileStream);
+
+            }
+            return Json(slide.Photo.FileName);
         }
     }
 }
