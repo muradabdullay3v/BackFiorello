@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApplication1.DAL;
+using WebApplication1.Models;
 
 namespace WebApplication1.Areas.FiorelloAdmin.Controllers
 {
@@ -20,6 +21,20 @@ namespace WebApplication1.Areas.FiorelloAdmin.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Slide slide)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            if (slide.Photo.Length/1024 > 200)
+            {
+                ModelState.AddModelError("Photo" , "Image's max size must be less than 200kb");
+            }
+            return Content("Ok");
         }
     }
 }
