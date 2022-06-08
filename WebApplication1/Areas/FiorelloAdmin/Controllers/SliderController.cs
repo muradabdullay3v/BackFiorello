@@ -16,5 +16,10 @@ namespace WebApplication1.Areas.FiorelloAdmin.Controllers
         {
             return View(_context.Slides);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
