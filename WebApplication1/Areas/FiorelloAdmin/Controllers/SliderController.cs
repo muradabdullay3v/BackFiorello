@@ -47,7 +47,7 @@ namespace WebApplication1.Areas.FiorelloAdmin.Controllers
                 return View();
             }
             var fileName=Guid.NewGuid().ToString() + slide.Photo.FileName;
-            var resultPath = Path.Combine(_env.WebRootPath,"img",fileName);
+            var resultPath = Path.Combine(_env.WebRootPath,"images",fileName);
             using (FileStream fileStream = new FileStream(resultPath, FileMode.Create))
             {
                 await slide.Photo.CopyToAsync(fileStream);
