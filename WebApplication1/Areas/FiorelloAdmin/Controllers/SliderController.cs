@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using WebApplication1.DAL;
 using WebApplication1.Helpers;
@@ -59,12 +60,48 @@ namespace WebApplication1.Areas.FiorelloAdmin.Controllers
             if (id == null) return BadRequest();
             var slider = _context.Slides.Find(id);
             if (slider == null) return NotFound();
-            var path = Helper.GetPath(_env.WebRootPath , "img" , slider.Url);
+            var path = Helper.GetPath(_env.WebRootPath , "images" , slider.Url);
             if (System.IO.File.Exists(path))
             {
                 System.IO.File.Delete(path);
             }
             _context.Slides.Remove(slider);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Update(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            Slide slide = _context.Slides.FirstOrDefault(c => c.Id == id);
+            if (slide == null)
+            {
+                return NotFound();
+            }
+            return View(slide);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> Update(int? id , Slide slide)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            Slide slideDb = _context.Slides.FirstOrDefault(c => c.Id == id);
+
+            if (slide == null)
+            {
+                return NotFound();
+            }
+            Create(slide);
+            Delete(id);
+            slideDb.Url = slide.Url;
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

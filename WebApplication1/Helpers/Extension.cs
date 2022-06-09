@@ -21,7 +21,7 @@ namespace WebApplication1.Helpers
         public async static Task<string> SaveFileAsync(this IFormFile file , string root , params string[] folders)
         {
             var fileName = Guid.NewGuid().ToString() + file.FileName;
-            var resultPath = Path.Combine(GetPath(root , folders), fileName);
+            var resultPath = Path.Combine(Helper.GetPath(root , folders), fileName);
             using (FileStream fileStream = new FileStream(resultPath, FileMode.Create))
             {
                 
