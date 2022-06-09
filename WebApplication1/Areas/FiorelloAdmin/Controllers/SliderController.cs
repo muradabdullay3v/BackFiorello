@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using WebApplication1.DAL;
+using WebApplication1.Helpers;
 using WebApplication1.Models;
 
 namespace WebApplication1.Areas.FiorelloAdmin.Controllers
@@ -36,25 +37,34 @@ namespace WebApplication1.Areas.FiorelloAdmin.Controllers
             {
                 return View();
             }
-            if (slide.Photo.Length/1024 > 200)
+            if (slide.Photo.CheckFlieSize(200))
             {
                 ModelState.AddModelError("Photo" , "Image's max size must be less than 200kb");
                 return View();
             }
-            if (!slide.Photo.ContentType.Contains("image/"))
+            if (!slide.Photo.CheckFileType("image/"))
             {
                 ModelState.AddModelError("Photo", "Type of File must be image");
                 return View();
             }
-            var fileName=Guid.NewGuid().ToString() + slide.Photo.FileName;
-            var resultPath = Path.Combine(_env.WebRootPath,"images",fileName);
-            using (FileStream fileStream = new FileStream(resultPath, FileMode.Create))
-            {
-                await slide.Photo.CopyToAsync(fileStream);
-
-            }
-            slide.Url = fileName;
+            
+            slide.Url = await slide.Photo.SaveFileAsync(_env.WebRootPath,"images");
             await _context.Slides.AddAsync(slide);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return BadRequest();
+            var slider = _context.Slides.Find(id);
+            if (slider == null) return NotFound();
+            var path = Helper.GetPath(_env.WebRootPath , "img" , slider.Url);
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+            }
+            _context.Slides.Remove(slider);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
