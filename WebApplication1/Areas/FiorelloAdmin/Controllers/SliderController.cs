@@ -99,8 +99,12 @@ namespace WebApplication1.Areas.FiorelloAdmin.Controllers
             {
                 return NotFound();
             }
-            Create(slide);
-            Delete(id);
+            slide.Url = await slide.Photo.SaveFileAsync(_env.WebRootPath, "images");
+            var path = Helper.GetPath(_env.WebRootPath, "images", slideDb.Url);
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+            }
             slideDb.Url = slide.Url;
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
