@@ -99,6 +99,20 @@ namespace WebApplication1.Areas.FiorelloAdmin.Controllers
             {
                 return NotFound();
             }
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            if (slide.Photo.CheckFlieSize(200))
+            {
+                ModelState.AddModelError("Photo", "Image's max size must be less than 200kb");
+                return View();
+            }
+            if (!slide.Photo.CheckFileType("image/"))
+            {
+                ModelState.AddModelError("Photo", "Type of File must be image");
+                return View();
+            }
             slide.Url = await slide.Photo.SaveFileAsync(_env.WebRootPath, "images");
             var path = Helper.GetPath(_env.WebRootPath, "images", slideDb.Url);
             if (System.IO.File.Exists(path))
